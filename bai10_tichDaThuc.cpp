@@ -1,32 +1,26 @@
-#include <bits/stdc++.h>
-#define endl "\n"
-using namespace std;
+#include <stdio.h>
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
     int t;
-    cin >> t;
+    scanf("%d", &t);
     while (t--)
     {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; i++)
-            cin >> a[i];
-        sort(a.begin(), a.end());
-        int ans = n, l = n / 2 - 1, r = n - 1;
-        while (l >= 0 && r >= n / 2)
+        int n, m;
+        scanf("%d%d", &n, &m);
+        int a[n + 1], b[m + 1], c[m + n + 1] = {};
+        for (int i = n; i >= 1; i--)
+            scanf("%d", &a[i]);
+        for (int i = m; i >= 1; i--)
+            scanf("%d", &b[i]);
+        for (int i = 1; i <= n; i++)
         {
-            if (2 * a[l] <= a[r])
+            for (int j = 1; j <= m; j++)
             {
-                l--;
-                r--;
-                ans--;
+                c[i + j] += a[i] * b[j];
             }
-            else
-                l--;
         }
-        cout << ans << endl;
+        for (int i = m + n; i >= 2; i--)
+            printf("%d ", c[i]);
+        printf("\n");
     }
 }
