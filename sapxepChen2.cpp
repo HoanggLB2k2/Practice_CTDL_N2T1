@@ -1,12 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-
 void insertionSort(vector<int> &vec)
 {
     int n = vec.size();
-    vector<vector<int>> steps; // Mảng lưu trữ các bước sắp xếp
-
+    vector<vector<int>> step(n); 
     for (int i = 0; i < n; i++)
     {
         int key = vec[i];
@@ -17,25 +15,23 @@ void insertionSort(vector<int> &vec)
             j = j - 1;
         }
         vec[j + 1] = key;
-
-        // Lưu bước sắp xếp vào mảng
-        steps.push_back(vec);
-    }
-
-    // In ngược lại các bước
-    for (int i = steps.size() - 1; i >= 0; i--)
-    {
-        cout << "Buoc " << n - i - 1 << ": ";
-        for (int k = 0; k < steps[i].size(); k++)
+        for (int k = 0; k <= i; k++)
         {
-            cout << steps[i][k] << " ";
+            step[i].push_back(vec[k]);
         }
-        cout << endl;
+    }
+    for(int i = n - 1; i >= 0; i--) 
+    {
+        cout<<"Buoc "<<i<<": ";
+        for(auto x : step[i])
+        {
+            cout<<x<<" ";
+        }
+        cout<<endl;
     }
 }
-
-// Hàm main
-int main()
+// main
+int main(int argc, char const *argv[])
 {
     int t;
     cin >> t;
@@ -46,8 +42,7 @@ int main()
         vector<int> vec;
         for (int i = 0; i < n; i++)
         {
-            int x;
-            cin >> x;
+            int x;  cin>>x;
             vec.push_back(x);
         }
         insertionSort(vec);
